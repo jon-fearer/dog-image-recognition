@@ -1,0 +1,5 @@
+hidden_layer_size=200
+iterations=250
+final_cost=4.79
+train_photos=35
+test_photos=4
