@@ -72,6 +72,8 @@ model.fit_generator(
     steps_per_epoch=nb_train_samples // batch_size,
     epochs=epochs,
     validation_data=validation_generator,
-    validation_steps=nb_validation_samples // batch_size)
+    validation_steps=nb_validation_samples // batch_size,
+    use_multiprocessing=True,
+    workers=8)
 
 model.save('model_2.h5')
