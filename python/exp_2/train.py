@@ -74,6 +74,6 @@ model.fit_generator(
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
-    workers=8)
+    workers=16)
 
 model.save('model_2.h5')
