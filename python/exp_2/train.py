@@ -1,3 +1,5 @@
+import pickle
+
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
@@ -12,7 +14,7 @@ train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
 nb_train_samples = 2000
 nb_validation_samples = 800
-epochs = 100
+epochs = 250
 batch_size = 16
 
 if K.image_data_format() == 'channels_first':
@@ -67,13 +69,16 @@ validation_generator = test_datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='binary')
 
-model.fit_generator(
+history = model.fit_generator(
     train_generator,
     steps_per_epoch=nb_train_samples // batch_size,
     epochs=epochs,
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
-    workers=16)
+    workers=8)
 
-model.save('model_2.h5')
+with open('history', 'wb') as f:
+    pickle.dump(history, f)
+
+model.save('model.h5')
