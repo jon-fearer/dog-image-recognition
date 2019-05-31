@@ -5,6 +5,7 @@ from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 from keras import backend as K
+from keras import regularizers
 
 
 # dimensions of our images.
@@ -12,8 +13,8 @@ img_width, img_height = 150, 150
 
 train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
-nb_train_samples = 2000
-nb_validation_samples = 800
+nb_train_samples = 4000
+nb_validation_samples = 1600
 epochs = 150
 batch_size = 16
 
@@ -36,9 +37,10 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
-model.add(Dense(64))
+model.add(Dense(64),
+          kernel_regularizer=regularizers.l2(0.01))
 model.add(Activation('relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.7))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
