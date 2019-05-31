@@ -15,7 +15,7 @@ train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
 nb_train_samples = 4000
 nb_validation_samples = 1600
-epochs = 100
+epochs = 20
 batch_size = 16
 
 if K.image_data_format() == 'channels_first':
@@ -40,7 +40,7 @@ model.add(Flatten())
 model.add(Dense(64,
                 kernel_regularizer=regularizers.l2(0.01)))
 model.add(Activation('relu'))
-model.add(Dropout(0.7))
+model.add(Dropout(0.4))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
