@@ -13,9 +13,9 @@ img_width, img_height = 150, 150
 
 train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
-nb_train_samples = 4000
-nb_validation_samples = 1600
-epochs = 20
+nb_train_samples = 5000
+nb_validation_samples = 2000
+epochs = 50
 batch_size = 16
 
 if K.image_data_format() == 'channels_first':
@@ -78,7 +78,7 @@ history = model.fit_generator(
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
-    workers=8)
+    workers=4)
 
 with open('history', 'wb') as f:
     pickle.dump(history, f)
