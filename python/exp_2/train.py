@@ -1,6 +1,7 @@
 import pickle
+from time import time
 
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, TensorBoard
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
@@ -24,6 +25,7 @@ es = EarlyStopping(monitor='val_loss',
                    verbose=1,
                    patience=10,
                    restore_best_weights=True)
+tb = TensorBoard(log_dir='logs/{}'.format(time()))
 
 if K.image_data_format() == 'channels_first':
     input_shape = (3, img_width, img_height)
@@ -86,7 +88,7 @@ history = model.fit_generator(
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
     workers=4,
-    callbacks=[es])
+    callbacks=[es, tb])
 
 with open('history', 'wb') as f:
     pickle.dump(history, f)
