@@ -1,5 +1,6 @@
 import pickle
 
+from keras.callbacks import EarlyStopping
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
@@ -17,6 +18,12 @@ nb_train_samples = 5000
 nb_validation_samples = 2000
 epochs = 40
 batch_size = 16
+
+es = EarlyStopping(monitor='val_loss',
+                   mode='min',
+                   verbose=1,
+                   patience=10,
+                   restore_best_weights=True)
 
 if K.image_data_format() == 'channels_first':
     input_shape = (3, img_width, img_height)
@@ -78,7 +85,8 @@ history = model.fit_generator(
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
-    workers=8)
+    workers=4,
+    callbacks=[es])
 
 with open('history', 'wb') as f:
     pickle.dump(history, f)
