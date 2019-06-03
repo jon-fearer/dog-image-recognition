@@ -17,7 +17,7 @@ train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
 nb_train_samples = 5000
 nb_validation_samples = 2000
-epochs = 50
+epochs = 40
 batch_size = 16
 
 es = EarlyStopping(monitor='val_loss',
@@ -47,9 +47,9 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(64,
-                kernel_regularizer=regularizers.l2(0.01)))
+                kernel_regularizer=regularizers.l2(0.05)))
 model.add(Activation('relu'))
-model.add(Dropout(0.4))
+model.add(Dropout(0.45))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
