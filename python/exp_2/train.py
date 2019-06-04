@@ -87,7 +87,7 @@ history = model.fit_generator(
     validation_data=validation_generator,
     validation_steps=nb_validation_samples // batch_size,
     use_multiprocessing=True,
-    workers=4,
+    workers=8,
     callbacks=[es, tb])
 
 with open('history', 'wb') as f:

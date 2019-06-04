@@ -1,7 +1,9 @@
 *.jpg
+*.JPG
 .DS_Store
 *.DS_Store
 octave-workspace
 *.mat
 data.zip
 *.pem
+logs/
