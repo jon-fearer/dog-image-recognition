@@ -6,6 +6,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
+from keras.optimizers import RMSprop
 from keras import backend as K
 from keras import regularizers
 
@@ -17,7 +18,7 @@ train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
 nb_train_samples = 4500
 nb_validation_samples = 500
-epochs = 40
+epochs = 8
 batch_size = 16
 
 es = EarlyStopping(monitor='val_loss',
@@ -46,15 +47,15 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
-model.add(Dense(64,
-                kernel_regularizer=regularizers.l2(0.1)))
+model.add(Dense(32,
+                kernel_regularizer=regularizers.l2(0.2)))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
 model.compile(loss='binary_crossentropy',
-              optimizer='rmsprop',
+              optimizer=RMSprop(lr=0.0005),
               metrics=['accuracy'])
 
 # this is the augmentation configuration we will use for training
