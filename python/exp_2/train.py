@@ -20,8 +20,8 @@ nb_validation_samples = 2000
 epochs = 40
 batch_size = 16
 
-es = EarlyStopping(monitor='val_loss',
-                   mode='min',
+es = EarlyStopping(monitor='val_acc',
+                   mode='max',
                    verbose=1,
                    patience=10,
                    restore_best_weights=True)
