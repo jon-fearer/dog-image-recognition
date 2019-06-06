@@ -7,3 +7,4 @@ octave-workspace
 data.zip
 *.pem
 logs/
+venv/
