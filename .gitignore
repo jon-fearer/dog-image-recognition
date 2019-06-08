@@ -8,3 +8,4 @@ data.zip
 *.pem
 logs/
 venv/
+logs.zip
