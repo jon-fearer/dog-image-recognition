@@ -90,7 +90,10 @@ history = model.fit_generator(
     workers=8,
     callbacks=[es, tb])
 
-with open('history', 'wb') as f:
-    pickle.dump(history, f)
+try:
+    with open('history', 'wb') as f:
+        pickle.dump(history, f)
+except:
+    print('unable to save history')
 
 model.save('model.h5')
