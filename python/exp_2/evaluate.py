@@ -17,7 +17,7 @@ validation_generator = test_datagen.flow_from_directory(
     class_mode='binary',
     shuffle=False)
 
-model = load_model('./archive/4/model.h5')
+model = load_model('./archive/7/model.h5')
 result = model.predict_generator(validation_generator,
                                  steps=1)
 
